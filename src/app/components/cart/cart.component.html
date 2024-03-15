@@ -1,0 +1,76 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="cart my-4">
+
+    <div *ngIf="cartList.length == 0" class="empty-cart mx-auto">
+        <img src="assets/empty_cart.svg" class="w-100" alt="empty-cart">
+    </div>
+
+    <div *ngIf="cartList.length != 0">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="  fw-bolder text-body-tertiary ">
+                    <span class=" text-black">Number of cart items: </span>
+                    {{numOfCartItems}}
+                </p>
+            </div>
+            <div class="col-md-6 ">
+                <div class="total-price ">
+                    <p class="  fw-bolder text-body-tertiary ">
+                        <span class=" text-black">Total price:</span>
+                        {{totalCartPrice | currency: ' '}} EGP
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-danger d-block ms-auto" (click)="removeCartProducts()">Clear Cart</button>
+
+        <div *ngFor="let productItem of cartList" class="row shadow-sm p-3 my-3">
+            <div class="col-lg-1 col-md-3">
+                <img [src]="productItem.product.imageCover" class="w-100" [alt]="productItem.product.title">
+            </div>
+            <div class="col-lg-11 col-md-9  d-flex flex-column justify-content-center">
+                <div class="row align-items-start">
+                    <h5 class="fw-bolder my-3">{{productItem.product.title | sliceString:3}}</h5>
+                    <div class="col-md-8 col-6">
+                        <div class="">
+                            <p class="pb-0 py-1 "><span class="fw-bolder">Price:</span> {{productItem.price | currency:
+                                '
+                                '}} EGP</p>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-6">
+                        <div class="d-flex align-items-start  justify-content-end">
+                            <div class=" me-2">
+                                <button [disabled]="productItem.count == productItem.product.quantity"
+                                    class="btn bg-main text-white  "
+                                    (click)="UpdateProductQuantity(productItem.product._id, productItem.count+1,$event)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                {{productItem.count}}
+                                <button [disabled]="productItem.count == 0" class="btn bg-main text-white ms-1"
+                                    (click)="UpdateProductQuantity(productItem.product._id, productItem.count-1,$event)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="btn text-danger cursor-pointer text-start mt-2"
+                (click)="removeProductFromCart(productItem.product._id)">
+                <i class=" fa fa-trash"></i> Remove product
+            </p>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn bg-main text-white d-block me-auto" [routerLink]="['/shippingAddress',cartId]">
+                Online Payment</button>
+        </div>
+    </div>
+</div>

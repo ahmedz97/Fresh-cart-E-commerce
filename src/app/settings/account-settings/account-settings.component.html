@@ -1,0 +1,46 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="accountSettings  my-5 w-75 mx-auto">
+
+    <div class="shadow p-4 rounded">
+        <div class="row pt-4 g-5 ">
+            <div class="col-md-6 d-flex">
+                <div class="me-3 pb-4">
+                    <i class="fa-solid fa-user p-3 bg-body-tertiary rounded-circle"></i>
+                </div>
+                <div>
+                    <h4 class="fw-bolder ">Your Info</h4>
+                    <p class="fw-bolder my-2 ">
+                        <span class="text-body-tertiary fs-6">Name:</span>
+                        {{userName}}
+                    </p>
+                    <p class="fw-bolder my-2 ">
+                        <span class="text-body-tertiary fs-6">Email:</span>
+                        {{userEmail}}
+                    </p>
+                    <p class="fw-bolder my-2 ">
+                        <span class="text-body-tertiary fs-6">yourRole:</span>
+                        {{userRole}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="update">
+            <div class=" p-3 rounded my-4  bg-body-tertiary">
+                <a [routerLink]="['/settings/updateData']" class=" fs-5">
+                    <i class="fa-solid fa-pen-to-square me-2"></i>
+                    <span>Update Your Data</span>
+                </a>
+            </div>
+
+            <div class=" p-3 rounded my-4  bg-body-tertiary">
+                <a [routerLink]="['/settings/updatePassword']" class=" fs-5">
+                    <i class="fa-solid fa-wrench me-2"></i>
+                    <span>Update Your Password</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

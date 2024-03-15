@@ -1,0 +1,24 @@
+.empty-cart {
+    width: 600px;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width:768px) {
+    .empty-cart {
+        width: 500px;
+    }
+
+    .total-price {
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width:567px) {
+    .empty-cart {
+        width: 330px;
+    }
+}

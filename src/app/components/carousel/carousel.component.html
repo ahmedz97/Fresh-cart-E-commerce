@@ -1,0 +1,11 @@
+<div class="carousel my-3">
+    <p class="fs-4 fw-semibold pb-2">Shop popular categories</p>
+    <owl-carousel-o [options]="carouselOptions">
+        <ng-container *ngFor="let category of categoriesData">
+            <ng-template carouselSlide [id]="category._id">
+                <img [src]="category.image" [alt]="category.name" style="height: 300px;">
+                <p class="text-center fw-bolder py-2">{{category.name}}</p>
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+</div>

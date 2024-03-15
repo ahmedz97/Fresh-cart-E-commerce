@@ -1,0 +1,83 @@
+<app-loader *ngIf="!isLoadingLayer"></app-loader>
+
+<div class="row px-3 py-3">
+    <div class="shipping shadow py-3 px-3 rounded my-4 w-75 mx-auto">
+        <h3 class="my-4">Enter Your Shipping Details :</h3>
+        <form [formGroup]="shippingForm" (ngSubmit)="sendShippingForm(shippingForm)">
+
+            <div *ngIf="apiError.length > 1" class="alert alert-danger">
+                {{apiError}}
+            </div>
+
+            <div class=" mb-2">
+                <label for="detailsInput" class="form-label">Shipping details:</label>
+                <input formControlName="details" type="text" id="detailsInput" [class]="
+                shippingForm.get('details')?.errors==null ? 
+                    'form-control is-valid' :
+                    shippingForm.get('details')?.errors?.['minlength'] ?
+                    'form-control is-invalid' : 'form-control'" />
+                <div class="alert alert-danger my-2 rounded p-2"
+                    *ngIf="shippingForm.get('details')?.touched && shippingForm.get('details')?.errors">
+                    <p class="mb-0 " *ngIf="shippingForm.get('details')?.errors?.['required']"> Input is required</p>
+                    <p class="mb-0" *ngIf="shippingForm.get('details')?.errors?.['minlength']">Min length is 4</p>
+                </div>
+            </div>
+
+            <!-- <div class=" mb-2">
+                <label for="detailsInput" class="form-label">Details:</label>
+                <input formControlName="details" type="text" id="detailsInput" [class]="
+                shippingForm.get('details')?.errors==null ? 
+                    'form-control is-valid' :
+                    shippingForm.get('details')?.errors?.['minLength'] ||
+                    shippingForm.get('details')?.errors?.['maxLength']?
+                    'form-control is-invalid' : 'form-control'">
+                <div *ngIf="shippingForm.get('details')?.errors && shippingForm.get('details')?.touched"
+                    class="alert alert-danger my-2 rounded p-2">
+                    <p class="mb-0" *ngIf="shippingForm.get('details')?.errors?.['required']">Details input is
+                        required</p>
+                    <p class="mb-0" *ngIf="shippingForm.get('details')?.errors?.['minLength']">Min Length is 4</p>
+                    <p class="mb-0" *ngIf="shippingForm.get('details')?.errors?.['maxLength']">Max Length is 20</p>
+                </div>
+            </div> -->
+
+            <div class="mb-2">
+                <label for="phoneInput" class="form-label">Phone:</label>
+                <input formControlName="phone" type="text" id="phoneInput" [class]="
+                shippingForm.get('phone')?.errors==null ? 
+                    'form-control is-valid' :
+                    shippingForm.get('phone')?.errors?.['pattern']?
+                    'form-control is-invalid' : 'form-control'">
+                <div *ngIf="shippingForm.get('phone')?.errors && shippingForm.get('phone')?.touched "
+                    class="alert alert-danger my-2 rounded p-2">
+                    <p class="mb-0" *ngIf="shippingForm.get('phone')?.errors?.['required']">
+                        Input is required</p>
+                    <p class="mb-0" *ngIf="shippingForm.get('phone')?.errors?.['pattern']">
+                        Enter valid phone number</p>
+                </div>
+            </div>
+
+            <div class=" mb-2">
+                <label for="cityInput" class="form-label">City:</label>
+                <input formControlName="city" type="text" id="cityInput" [class]="
+                shippingForm.get('city')?.errors==null ? 
+                    'form-control is-valid' :
+                    shippingForm.get('city')?.errors?.['minlength']||
+                    shippingForm.get('city')?.errors?.['maxlength'] ?
+                    'form-control is-invalid' : 'form-control'" />
+                <div class="alert alert-danger my-2 rounded p-2"
+                    *ngIf="shippingForm.get('city')?.touched && shippingForm.get('city')?.errors">
+                    <p class="mb-0 " *ngIf="shippingForm.get('city')?.errors?.['required']">Input is required</p>
+                    <p class="mb-0" *ngIf="shippingForm.get('city')?.errors?.['minlength']">Min length is 4</p>
+                    <p class="mb-0" *ngIf="shippingForm.get('city')?.errors?.['maxlength']">Max length is 20</p>
+                </div>
+            </div>
+
+            <button class="btn bg-main text-white mt-3 w-100 " [disabled]="shippingForm.invalid">
+                <span *ngIf="!isLoading">CheckOut</span>
+                <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+            </button>
+
+        </form>
+
+    </div>
+</div>
